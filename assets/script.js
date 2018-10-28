@@ -1,9 +1,38 @@
 var audio = document.getElementById('audio');
 var play = document.getElementById('play');
+var songs = document.getElementById('songs');
+var file = document.getElementById('file');
 play.addEventListener('click', function() {
 	audio.paused ? audio.play() : audio.pause();
 });
 
+
+function handleFiles(files) {
+	console.re.log(files[0].name);
+	audio.src = URL.createObjectURL(files[0]);
+	audio.play();
+}
+
+var audioCtx = new AudioContext();
+var analyser = audioCtx.createAnalyser();
+
+function init() {
+
+	source = audioCtx.createMediaElementSource(audio);
+
+	source.connect(analyser);
+	analyser.connect(audioCtx.destination);
+
+	analyser.fftSize = 1024;
+	bufferLength = analyser.frequencyBinCount;
+	dataArray = new Uint8Array(bufferLength);
+	WIDTH = app.screen.width;
+	HEIGHT = app.screen.height;
+	barWidth = (WIDTH / bufferLength);
+	barHeight;
+	rotation = 0;
+	arr = [];
+}
 var app = new PIXI.Application({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -11,13 +40,6 @@ var app = new PIXI.Application({
 	transparent: false,
 	resolution: 1
 });
-
-
-app.renderer.backgroundColor = 0x2e3a6b;
-app.renderer.autoResize = true;
-document.body.appendChild(app.view);
-
-
 var audioCtx = new AudioContext();
 var source = audioCtx.createMediaElementSource(audio);
 var analyser = audioCtx.createAnalyser();
@@ -33,6 +55,11 @@ var barWidth = (WIDTH / bufferLength);
 var barHeight;
 var rotation = 0;
 var arr = [];
+
+app.renderer.backgroundColor = 0x2e3a6b;
+app.renderer.autoResize = true;
+document.body.appendChild(app.view);
+
 
 var container = new PIXI.Container();
 
@@ -86,7 +113,3 @@ app.ticker.add(function(delta) {
 	graphics.endFill();
 	container.rotation += delta * 0.005;
 });
-
-// function map(value, lower1, upper1, lower2, upper2) {
-// 	return (value - lower1) / (upper1 - lower1) * (upper2 - lower2) + lower2;
-// }
