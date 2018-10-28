@@ -13,12 +13,32 @@
 			height: 100%;
 			margin: 0;
 		}
+		
+		#play {
+			position: absolute;
+			padding: 20px 20px;
+			bottom: 0;
+			right: 0;
+			border-top: 5px solid whitesmoke;
+			color: whitesmoke;
+			cursor: pointer;
+			letter-spacing: 4px;
+			transition-duration: 0.5s;
+		}
+		
+		#play:hover {
+			padding: 10px 20px;
+		}
 	</style>
 </head>
 
 <body>
-	<script src="assets/pixi.min.js"></script>
-	<audio id="audio" src="assets/audio2.mp3" controls></audio>
-	<script src="assets/script.js"></script>
+	<script src="pixi.min.js"></script>
+	<a id="play">&#9654; | &#10073;&#10073;</a>
+	<audio id="audio" src="audio2.mp3"></audio>
+	<script src="script.js"></script>
 </body>
+
+
+
 </html>
