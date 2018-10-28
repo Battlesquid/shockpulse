@@ -8,9 +8,14 @@ play.addEventListener('click', function() {
 
 
 function handleFiles(files) {
-	console.re.log(files[0].name);
 	audio.src = URL.createObjectURL(files[0]);
-	audio.play();
+	try {
+		audio.play();
+	}
+	catch (error) {
+		console.error(error);
+	}
+
 }
 
 var audioCtx = new AudioContext();
@@ -33,6 +38,7 @@ function init() {
 	rotation = 0;
 	arr = [];
 }
+
 var app = new PIXI.Application({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -113,3 +119,7 @@ app.ticker.add(function(delta) {
 	graphics.endFill();
 	container.rotation += delta * 0.005;
 });
+
+// function map(value, lower1, upper1, lower2, upper2) {
+// 	return (value - lower1) / (upper1 - lower1) * (upper2 - lower2) + lower2;
+// }
