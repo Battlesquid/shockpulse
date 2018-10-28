@@ -3,6 +3,7 @@
 
 <head>
 	<title>Audio+</title>
+	<script src="//console.re/connector.js" data-channel="c0b6-10e2-89a2" id="consolerescript"></script>
 	<style>
 		html {
 			margin: 0;
@@ -14,19 +15,51 @@
 			margin: 0;
 		}
 		
-		#play {
+		audio {
 			position: absolute;
-			padding: 20px 20px;
 			bottom: 0;
 			right: 0;
+			border: 5px solid #000;
+		}
+		
+		#play {
+			padding: 20px 20px;
 			border-top: 5px solid whitesmoke;
 			color: whitesmoke;
 			cursor: pointer;
-			letter-spacing: 4px;
+			/*letter-spacing: 4px;*/
 			transition-duration: 0.5s;
 		}
 		
 		#play:hover {
+			padding: 10px 20px;
+		}
+		
+		#songs {
+			position: absolute;
+			padding: 5px;
+			bottom: 0;
+			left: 0;
+			border-top: 5px solid whitesmoke;
+			color: whitesmoke;
+			cursor: pointer;
+		}
+		
+		#absparentright {
+			position: absolute;
+			bottom: 0;
+			right: 0;
+		}
+		
+		input[type=file] {
+			padding: 20px 20px;
+			border-top: 5px solid whitesmoke;
+			color: whitesmoke;
+			cursor: pointer;
+			transition-duration: 0.5s;
+		}
+		
+		input[type=file]:hover {
 			padding: 10px 20px;
 		}
 	</style>
@@ -35,7 +68,11 @@
 
 <body>
 	<script src="assets/pixi.min.js"></script>
-	<a id="play">&#9654; | &#10073;&#10073;</a>
+	<div id="absparentright">
+		<input onchange="handleFiles(this.files);" id="file" type="file">
+		<a id="play">&#9654; | &#10073;&#10073;</a>
+
+	</div>
 	<audio id="audio" src="assets/audio2.mp3"></audio>
 	<script src="assets/script.js"></script>
 </body>
