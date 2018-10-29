@@ -3,22 +3,19 @@
 
 <head>
 	<title>Audio+</title>
+	<script src="//console.re/connector.js" data-channel="c0b6-10e2-89a2" id="consolerescript"></script>
+	<link rel="icon" href="assets/icon.ico">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 	<style>
 		html {
 			margin: 0;
+			font-family: 'Nanum Gothic', sans-serif;
 		}
 		
 		html,
 		body {
 			height: 100%;
 			margin: 0;
-		}
-		
-		audio {
-			position: absolute;
-			bottom: 0;
-			right: 0;
-			border: 5px solid #000;
 		}
 		
 		#play {
@@ -52,6 +49,15 @@
 			right: 0;
 		}
 		
+		#absparentleft {
+			position: absolute;
+			margin: 5px;
+			bottom: 0;
+			left: 0;
+			color: whitesmoke;
+			font-size: 24pt;
+		}
+		
 		input[type=file] {
 			padding: 20px 20px;
 			border-top: 5px solid whitesmoke;
@@ -67,7 +73,7 @@
 			padding: 10px 20px;
 		}
 	</style>
-	<link rel="icon" href="assets/icon.ico">
+
 </head>
 
 <body>
@@ -75,9 +81,12 @@
 	<div id="absparentright">
 		<input onchange="handleFiles(this.files);" id="file" type="file">
 		<a id="play">&#9654; | &#10073;&#10073;</a>
-
 	</div>
-	<audio id="audio" src="assets/audio2.mp3"></audio>
+	<div id="absparentleft">
+		Now Playing - <br>
+		<div id="nowplaying">TULE - Fearless</div>
+	</div>
+	<audio id="audio" src="assets/TULE - Fearless.mp3"></audio>
 	<script src="assets/script.js"></script>
 </body>
 
