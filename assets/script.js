@@ -1,43 +1,9 @@
 var audio = document.getElementById('audio');
 var play = document.getElementById('play');
-var songs = document.getElementById('songs');
 var file = document.getElementById('file');
 play.addEventListener('click', function() {
 	audio.paused ? audio.play() : audio.pause();
 });
-
-
-function handleFiles(files) {
-	audio.src = URL.createObjectURL(files[0]);
-	try {
-		audio.play();
-	}
-	catch (error) {
-		console.error(error);
-	}
-
-}
-
-var audioCtx = new AudioContext();
-var analyser = audioCtx.createAnalyser();
-
-function init() {
-
-	source = audioCtx.createMediaElementSource(audio);
-
-	source.connect(analyser);
-	analyser.connect(audioCtx.destination);
-
-	analyser.fftSize = 1024;
-	bufferLength = analyser.frequencyBinCount;
-	dataArray = new Uint8Array(bufferLength);
-	WIDTH = app.screen.width;
-	HEIGHT = app.screen.height;
-	barWidth = (WIDTH / bufferLength);
-	barHeight;
-	rotation = 0;
-	arr = [];
-}
 
 var app = new PIXI.Application({
 	width: window.innerWidth,
@@ -46,12 +12,17 @@ var app = new PIXI.Application({
 	transparent: false,
 	resolution: 1
 });
+
+app.renderer.backgroundColor = 0x2E3A6B;
+app.renderer.autoResize = true;
+document.body.appendChild(app.view);
+
 var audioCtx = new AudioContext();
+var analyser = audioCtx.createAnalyser();
 var source = audioCtx.createMediaElementSource(audio);
 var analyser = audioCtx.createAnalyser();
 source.connect(analyser);
 analyser.connect(audioCtx.destination);
-
 analyser.fftSize = 1024;
 var bufferLength = analyser.frequencyBinCount;
 var dataArray = new Uint8Array(bufferLength);
@@ -59,15 +30,11 @@ var WIDTH = app.screen.width;
 var HEIGHT = app.screen.height;
 var barWidth = (WIDTH / bufferLength);
 var barHeight;
-var rotation = 0;
 var arr = [];
 
-app.renderer.backgroundColor = 0x2e3a6b;
-app.renderer.autoResize = true;
-document.body.appendChild(app.view);
-
-
+var graphics = new PIXI.Graphics();
 var container = new PIXI.Container();
+
 
 for (var i = 0; i < bufferLength; i++) {
 	var g = new PIXI.Graphics();
@@ -79,26 +46,23 @@ for (var i = 0; i < bufferLength; i++) {
 	else {
 		g.beginFill(0xcccccc);
 	}
-
 	g.drawRect(1, 1, 1, 1);
 	g.endFill();
-
 	app.stage.addChild(g);
 	container.addChild(g);
 	arr.push(g);
 }
-
-var graphics = new PIXI.Graphics();
 
 graphics.pivot.set(app.screen.width / 2, app.screen.height / 2);
 graphics.setTransform(app.screen.width / 2, app.screen.height / 2);
 app.stage.addChild(graphics);
 container.addChild(graphics);
 
-
 container.pivot.set(app.screen.width / 2, app.screen.height / 2);
 container.position.set(app.screen.width / 2, app.screen.height / 2);
 app.stage.addChild(container);
+
+
 app.ticker.add(function(delta) {
 	analyser.getByteFrequencyData(dataArray);
 	graphics.clear();
@@ -120,6 +84,13 @@ app.ticker.add(function(delta) {
 	container.rotation += delta * 0.005;
 });
 
-// function map(value, lower1, upper1, lower2, upper2) {
-// 	return (value - lower1) / (upper1 - lower1) * (upper2 - lower2) + lower2;
-// }
+function handleFiles(files) {
+	audio.src = URL.createObjectURL(files[0]);
+	document.getElementById('nowplaying').innerHTML = files[0].name.substring(0, files[0].name.indexOf(".mp3"));
+	try {
+		audio.play();
+	}
+	catch (error) {
+		console.error(error);
+	}
+}
