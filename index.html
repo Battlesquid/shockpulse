@@ -3,13 +3,12 @@
 
 <head>
 	<title>Shockpulse</title>
-	<script src="//console.re/connector.js" data-channel="c0b6-10e2-89a2" id="consolerescript"></script>
 	<link rel="icon" href="assets/icon.ico">
 	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
 	<style>
 		html {
 			margin: 0;
-			font-family: 'Nanum Gothic', sans-serif;
 		}
 		
 		html,
@@ -18,12 +17,30 @@
 			margin: 0;
 		}
 		
+		a {
+			color: whitesmoke;
+		}
+		
+		input[type=file] {
+			padding: 20px 20px;
+			border-top: 5px solid whitesmoke;
+			color: whitesmoke;
+			cursor: pointer;
+			-webkit-transition-duration: 0.5s;
+			-o-transition-duration: 0.5s;
+			transition-duration: 0.5s;
+			outline: none;
+		}
+		
+		input[type=file]:hover {
+			padding: 10px 20px;
+		}
+		
 		#play {
 			padding: 20px 20px;
 			border-top: 5px solid whitesmoke;
 			color: whitesmoke;
 			cursor: pointer;
-			/*letter-spacing: 4px;*/
 			-webkit-transition-duration: 0.5s;
 			-o-transition-duration: 0.5s;
 			transition-duration: 0.5s;
@@ -56,21 +73,40 @@
 			left: 0;
 			color: whitesmoke;
 			font-size: 24pt;
+			font-family: 'Bungee', sans-serif;
+			width: 400px;
+			word-wrap: break-word;
 		}
 		
-		input[type=file] {
-			padding: 20px 20px;
-			border-top: 5px solid whitesmoke;
+		#tr {
+			position: absolute;
+			top: 0;
+			left: 0;
+			margin: 10px;
+		}
+		
+		#title {
+			margin: 0;
+			border-left: 1px solid whitesmoke;
 			color: whitesmoke;
+			font-size: 24pt;
+			font-family: 'Bungee', sans-serif;
 			cursor: pointer;
-			-webkit-transition-duration: 0.5s;
-			-o-transition-duration: 0.5s;
-			transition-duration: 0.5s;
-			outline: none;
+			writing-mode: vertical-rl;
+			text-orientation: mixed;
+			float: left;
 		}
 		
-		input[type=file]:hover {
-			padding: 10px 20px;
+		#about {
+			border: 1px solid whitesmoke;
+			border-left: none;
+			border-right: none;
+			width: 25%;
+			padding: 10px;
+			margin: none;
+			float: left;
+			color: whitesmoke;
+			display: none;
 		}
 	</style>
 
@@ -83,9 +119,16 @@
 		<a id="play">&#9654; | &#10073;&#10073;</a>
 	</div>
 	<div id="absparentleft">
-		Now Playing - <br>
 		<div id="nowplaying">TULE - Fearless</div>
 	</div>
+
+	<div id="tr">
+		<div id="about">
+			Shockpulse is an audio visializer created by Battlesquid. It was built using Pixi.JS. Check out the repository <a href="https://github.com/Battlesquid/shockpulse" target="_blank">here</a>.
+		</div>
+		<p id="title">Shockpulse &#9654;</p>
+	</div>
+
 	<audio id="audio" src="assets/TULE - Fearless.mp3"></audio>
 	<script src="assets/script.js"></script>
 </body>
