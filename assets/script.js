@@ -1,3 +1,4 @@
+window.onload = () => {
 var audio = document.getElementById('audio');
 var play = document.getElementById('play');
 var file = document.getElementById('file');
@@ -93,4 +94,5 @@ function handleFiles(files) {
 	catch (error) {
 		console.error(error);
 	}
+}
 }
